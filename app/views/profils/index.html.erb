@@ -1,25 +1,18 @@
-<h1>Listing profils</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Content</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<div class="page-header">
+	<h1>All profils</h1>
+</div>
+<%= link_to "Post a new Profile", new_profil_path, class:"btn btn-success" %>
 <% @profils.each do |profil| %>
-  <tr>
-    <td><%= profil.name %></td>
-    <td><%= profil.content %></td>
-    <td><%= link_to 'Show', profil %></td>
-    <td><%= link_to 'Edit', edit_profil_path(profil) %></td>
-    <td><%= link_to 'Destroy', profil, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+<div class="profil">
+	<strong><%= profil.name %></strong>
+	<p><%= profil.content %></p>
+	<div class="meta">
+		<%= link_to time_ago_in_words(profil.created_at)+" ago", profil %>
 
-<br />
-
-<%= link_to 'New Profil', new_profil_path %>
+		<span class="admin">
+			|<%= link_to 'edit', edit_profil_path(profil) %>|
+			<%= link_to 'Destroy', profil, method: :delete, data:{confirm:"Are you really wanna delete this profil ?"} %>
+		</span>
+	</div>
+</div>
+	<% end %>
